@@ -47,8 +47,8 @@ You have to connect the `NET` pin of the PC1000 controller to your esp8266 via a
 
 Data will be published on your MQTT server every few seconds using this topics:
 
-`pool/power`  (true / false)
-`pool/mode` (heat / cool)
-`pool/automatic_mode` (true / false) Automatic = heat or cold according to the programmed temp and the out temperature
-`pool/temp_out`  (temperature out in celcius)
-`pool/temp_prog`  (programmed temperature in celcius)
+- `pool/power`  (true / false)
+- `pool/mode` (heat / cool)
+- `pool/automatic_mode` (true / false) Automatic = heat or cold according to the programmed temp and the out temperature
+- `pool/temp_out`  (temperature out in celcius)
+- `pool/temp_prog`  (programmed temperature in celcius)
