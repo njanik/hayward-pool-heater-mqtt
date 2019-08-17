@@ -26,7 +26,7 @@ You have to connect the `NET` pin of the PC1000 controller to your esp8266 via a
 |               |            |   |                   |                |
 |               |            +-+-+                   |                |
 |               |              |                     |                |
-|               |              +---------------------+  D6 pin        |
+|               |              +---------------------+  D5 pin        |
 |               |              |                     |                |
 |               |            +-+-+                   |                |
 |               |            |   |                   |                |
