@@ -32,4 +32,11 @@ You will be able to change the settings via this topics:
 - `pool/set_mode` (HEAT/COOL/AUTO)
 - `pool/set_temp`  (temperature in celcius. You could set half degree. Ex: 27.5)
 
+---------
+
+Special thx to the french arduino comumnity, and especially to plode.
+
+[Whole reverse engineering topic (in french)](https://forum.arduino.cc/index.php?topic=258722.0)
+
+
 
