@@ -10,8 +10,8 @@ This version of the sketch is working on a **wemos d1 mini** (using the arduino 
 
 Shematic
 
-You have to connect the `NET` pin of the PC1000 controller to your esp8266 via a *bidirectional* level shifter, and connect the PC1000 `GND` to the `GND` of your esp8266.
-The 5v <-> 3.3v level shifter is mandaroty because the esp8266 is not 5V tolerant, and the heatpump **controller is not working with 3.3v**.
+You have to connect the `NET` pin of the PC1000 controller to your `D5` pin of the wemos d1 via a *bidirectional* level shifter, and connect the PC1000 `GND` to the `GND` of your esp8266.
+The 5v <-> 3.3v level shifter is mandatory because the esp8266 is not 5V tolerant, and the heatpump **controller is not working with 3.3v**.
 
 
 
@@ -34,7 +34,7 @@ You will be able to change the settings via this topics:
 
 ---------
 
-Special thx to the french arduino comumnity, and especially to plode.
+Special thx to the french arduino community, and especially to plode.
 
 [Whole reverse engineering topic (in french)](https://forum.arduino.cc/index.php?topic=258722.0)
 
