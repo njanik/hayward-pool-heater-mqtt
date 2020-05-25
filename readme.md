@@ -34,6 +34,10 @@ You will be able to change the settings via this topics:
 
 ---------
 
+![Demo with a node red UI flow](https://raw.githubusercontent.com/njanik/hayward-pool-heater-mqtt/master/20200523_111808.jpg)
+
+
+
 Special thx to the french arduino community, and especially to plode.
 
 [Whole reverse engineering topic (in french)](https://forum.arduino.cc/index.php?topic=258722.0)
