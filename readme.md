@@ -2,6 +2,7 @@
 
 This is a little project I've been working for a while now. I'm the owner of a Hayward pool heater (*Trevium HP55TR, which is also the same exact model of Hayward energy line pro* )
 This heat pump use a controller called **PC1000**.
+(Now also tested by another user and 100% working on a *MONO 50 Basic*, which have a controller named *CC203* if the online manual is correct)
 
 I have decoded the data using a small logic sniffer.
 
@@ -22,8 +23,10 @@ Data will be published on your MQTT server every few seconds using this topics:
 - `pool/power`  (true / false)
 - `pool/mode` (heat / cool)
 - `pool/automatic_mode` (true / false) Automatic = heat or cold according to the programmed temp and the out temperature
-- `pool/temp_out`  (temperature out in celcius)
+- `pool/temp_in`  (temperature `in` in celcius)
+- `pool/temp_out`  (temperature `out` in celcius)
 - `pool/temp_prog`  (programmed temperature in celcius)
+- `pool/wifi_rssi`  (Wifi received Signal Strength Indication)
 
 You will be able to change the settings via this topics:
 
@@ -39,6 +42,7 @@ You will be able to change the settings via this topics:
 
 
 Special thx to the french arduino community, and especially to plode.
+Also to this github users: @jruibarroso and @marcphilibert for adding temperature in and wifi rssi data.
 
 [Whole reverse engineering topic (in french)](https://forum.arduino.cc/index.php?topic=258722.0)
 
