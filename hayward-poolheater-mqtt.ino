@@ -18,6 +18,7 @@ PubSubClient client(espClient);
 #define HEAT B00001000
 #define AUTO B00000100
 
+long rssi = 0;
 float cmdTemp;
 byte cmdMode;
 boolean cmdPower;
@@ -25,7 +26,7 @@ boolean cmdPower;
 float currentProgTemp = 0;
 
 float currentTempOut = 0;
-//float currentTempIn = 0;       //TODO
+float currentTempIn = 0;
 byte currentMode = 255;
 boolean currentPower = false;
 
@@ -36,18 +37,18 @@ byte defaultMaskTemp = 2;
 
 //static CMD trame values
 unsigned char cmdTrame[12] = {
-    129,  //0 - HEADER
+    129,    //0 - HEADER
     141,
-    96, //2 - POWER &MODE
+    232,    //2 - POWER &MODE
     6,
-    2,  //4 - TEMP
+    238,    //4 - TEMP
     30,
     188,
     188,
     188,
     188,
     0,
-    0,  //11 - CHECKSUM
+    0,      //11 - CHECKSUM
 };
 
 byte state = 0;
@@ -446,8 +447,10 @@ void publishCurrentParams()
     {
         client.publish("pool/power", String(currentPower).c_str());
         client.publish("pool/mode", String(modeToString(currentMode)).c_str());
+        client.publish("pool/temp_in", String(currentTempIn).c_str());
         client.publish("pool/temp_out", String(currentTempOut).c_str());
         client.publish("pool/temp_prog", String(currentProgTemp).c_str());
+        client.publish("pool/wifi_rssi", String(rssi = WiFi.RSSI()).c_str());
         Serial.println("params Published to mqtt server");
     }
 }
@@ -539,7 +542,6 @@ void loop()
 
             if (trame[0] == B01001011 && checksumIsValid(trame, wordCounter))
             {
-
                 // GET THE TEMP OUT
                 unsigned char temp = reverseBits(trame[4]);
                 temp &= B00111110;
@@ -556,6 +558,25 @@ void loop()
                 Serial.print("TEMP OUT:");
                 Serial.println(currentTempOut);
             }
+
+            else if  (trame[0] == B10001011 && checksumIsValid(trame, wordCounter))
+            {
+                // GET THE TEMP IN
+                unsigned char temp = reverseBits(trame[9]);
+                temp &= B00111110;
+                temp = temp >> 1;
+                temp = temp + 2;
+
+                bool halfDegree = (trame[9] & B10000000) >> 7;
+                float ftempIn = temp;
+                if (halfDegree) {
+                    ftempIn = ftempIn + 0.5;
+                }
+                currentTempIn = ftempIn;
+                Serial.print("TEMP IN:");
+                Serial.println(currentTempIn);
+            }
+
             else if (trame[0] == B10000001 && checksumIsValid(trame, wordCounter))
             {
 
