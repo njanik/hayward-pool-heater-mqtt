@@ -42,7 +42,7 @@ You will be able to change the settings via this topics:
 
 
 Special thx to the french arduino community, and especially to plode.
-Also to this github users: jruibarroso and marcphilibert for adding temperature in and wifi rssi data.
+Also to this github users: @jruibarroso and @marcphilibert for adding temperature in and wifi rssi data.
 
 [Whole reverse engineering topic (in french)](https://forum.arduino.cc/index.php?topic=258722.0)
 
