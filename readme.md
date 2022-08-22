@@ -3,6 +3,7 @@
 This is a little project I've been working for a while now. I'm the owner of a Hayward pool heater (*Trevium HP55TR, which is also the same exact model of Hayward energy line pro* )
 This heat pump use a controller called **PC1000**.
 (Now also tested by another user and 100% working on a *MONO 50 Basic*, which have a controller named *CC203* if the online manual is correct)
+Tested also on a Majestic heat pump (Hayward white label) that is using a **PC1001** controller.
 
 I have decoded the data using a small logic sniffer.
 
@@ -14,7 +15,7 @@ Shematic
 You have to connect the `NET` pin of the PC1000 controller to your `D5` pin of the wemos d1 via a *bidirectional* level shifter, and connect the PC1000 `GND` to the `GND` of your esp8266.
 The 5v <-> 3.3v level shifter is mandatory because the esp8266 is not 5V tolerant, and the heatpump **controller is not working with 3.3v**.
 
-
+On the **PC1001** board, you can connect the Wemos on +5V and GND using the connector CN16, then connect NET, +5V and GND to a *bi-directional logic level converter* (high voltage side) and, on the other side (low voltage side), connect the Wemos +3.3V, GND and D5. 
 
 **MQTT topics**
 
