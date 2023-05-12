@@ -2,8 +2,13 @@
 
 This is a little project I've been working for a while now. I'm the owner of a Hayward pool heater (*Trevium HP55TR, which is also the same exact model of Hayward energy line pro* )
 This heat pump use a controller called **PC1000**.
-(Now also tested by another user and 100% working on a *MONO 50 Basic*, which have a controller named *CC203* if the online manual is correct)
-Tested also on a Majestic heat pump (Hayward white label) that is using a **PC1001** controller.
+
+Following pool heaters have been tested:
+- **Trevium HP55TR** heat pump that is using a **PC1000** controller.
+- **Hayward energy line pro** heat pump that is using a **PC1000** controller.
+- **MONO 50 Basic** heat pump that is using a controller named **CC203** (if the online manual is correct)
+- **Majestic** heat pump (Hayward white label) that is using a **PC1001** controller.
+- **CPAC111** heat pump (Hayward) that is using a **PC1001** controller.
 
 I have decoded the data using a small logic sniffer.
 
