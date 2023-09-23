@@ -65,21 +65,32 @@ mqtt:
     - name: Pool Heater Temp In
       state_topic: pool/temp_in
       device_class: temperature
-      unit_of_measurement: "..C"
+      unit_of_measurement: "°C"
     - name: Pool Heater Temp Out
       state_topic: pool/temp_out
       device_class: temperature
-      unit_of_measurement: "..C"
+      unit_of_measurement: "°C"
     - name: Pool Heater Target
       state_topic: pool/temp_prog
       device_class: temperature
-      unit_of_measurement: "..C"
+      unit_of_measurement: "°C"
     - name: Pool Heater Mode
       state_topic: pool/mode
     - name: Pool Heater Wifi
       state_topic: pool/wifi_rssi
       device_class: signal_strength
       unit_of_measurement: "rssi"
+  number:
+    - name: Pool Heater Target
+      command_topic: pool/set_temp
+      min: 18
+      max: 33
+      state_topic: pool/temp_prog
+      device_class: temperature
+      unit_of_measurement: "°C"
+      mode: slider
+      step: 0.5
+
 ```
 
 The power switch itself is best controlled via a template switch
