@@ -9,7 +9,7 @@ Following pool heaters have been tested:
 - **MONO 50 Basic** heat pump that is using a controller named **CC203** (if the online manual is correct)
 - **Majestic** heat pump (Hayward white label) that is using a **PC1001** controller.
 - **CPAC111** heat pump (Hayward) that is using a **PC1001** controller.
-
+- **OASIS X19/24** heat pumps (Oasis) that is using a **PC1001** controller. These are common in Australia.
 I have decoded the data using a small logic sniffer.
 
 The last version of the sketch can now **received current parameters** and **send command** to the heatpump.
@@ -53,4 +53,51 @@ Also to this github users: @jruibarroso and @marcphilibert for adding temperatur
 [Whole reverse engineering topic (in french)](https://forum.arduino.cc/index.php?topic=258722.0)
 
 
+**Home Assistant Usage**
+```
+mqtt:
+  binary_sensor:
+    - name: Pool Heater Status
+      state_topic: pool/power
+      payload_on: 1
+      payload_off: 0
+  sensor:
+    - name: Pool Heater Temp In
+      state_topic: pool/temp_in
+      device_class: temperature
+      unit_of_measurement: "..C"
+    - name: Pool Heater Temp Out
+      state_topic: pool/temp_out
+      device_class: temperature
+      unit_of_measurement: "..C"
+    - name: Pool Heater Target
+      state_topic: pool/temp_prog
+      device_class: temperature
+      unit_of_measurement: "..C"
+    - name: Pool Heater Mode
+      state_topic: pool/mode
+    - name: Pool Heater Wifi
+      state_topic: pool/wifi_rssi
+      device_class: signal_strength
+      unit_of_measurement: "rssi"
+```
+
+The power switch itself is best controlled via a template switch
+
+```
+switch:
+  - platform: template
+    switches:
+      pool_heater:
+        friendly_name: Pool Heater
+        value_template: "{{ is_state('binary_sensor.pool_heater_status', 'on') }}"
+        turn_on:
+          service: mqtt.publish
+          data:
+            topic: pool/set_power_on
+        turn_off:
+          service: mqtt.publish
+          data:
+            topic: pool/set_power_off
+```
 
