@@ -7,34 +7,39 @@
 #include <ESP8266HTTPUpdateServer.h>
 #include "my_config.h"
 
+
+#define MAX_TEMP 33
+#define MIN_TEMP 15
+
+
 // http://192.168.0.100:8080/update
 // lolin wemos D1 mini lite
 
-const char *autodiscoverPayload = "{"
-                                  "\"name\": \"Pool heatpump\","
-                                  "\"uniq_id\": \"poolHeatpumpControllerPC1000\","
-                                  "\"dev\": {"
-                                  "\"ids\": [\"pool_heatpump_controller\"],"
-                                  "\"mf\": \"njanik/hayward-pool-heater-mqtt\","
-                                  "\"name\": \"Pool heatpump\""
-                                  "},"
-                                  "\"opt\": false,"
-                                  "\"temp_unit\": \"C\","
-                                  "\"precision\": 0.5,"
-                                  "\"step\": 0.5,"
-                                  "\"temp_step\": 0.5,"
-                                  "\"max_temp\": " + String(MAX_TEMP) + ","
-                                  "\"min_temp\": " + String(MIN_TEMP) + ","
-                                  "\"modes\": [\"off\", \"auto\", \"heat\", \"cool\"],"
-                                  "\"mode_cmd_t\": \"pool/set_mode\","
-                                  "\"temp_cmd_t\": \"pool/set_temp\","
-                                  "\"mode_stat_t\": \"pool/mode\","
-                                  "\"curr_temp_t\": \"pool/temp_in\","
-                                  "\"avty_t\": \"pool/available\","
-                                  "\"platform\": \"mqtt\","
-                                  "\"state_topic\": \"pool/data\","
-                                  "\"json_attr_t\": \"pool/data\""
-                                  "}";
+String autodiscoverPayload = "{"
+                             "\"name\": \"Pool heatpump\","
+                             "\"uniq_id\": \"poolHeatpumpControllerPC1000\","
+                             "\"dev\": {"
+                             "\"ids\": [\"pool_heatpump_controller\"],"
+                             "\"mf\": \"njanik/hayward-pool-heater-mqtt\","
+                             "\"name\": \"Pool heatpump\""
+                             "},"
+                             "\"opt\": false,"
+                             "\"temp_unit\": \"C\","
+                             "\"precision\": 0.5,"
+                             "\"step\": 0.5,"
+                             "\"temp_step\": 0.5,"
+                             "\"max_temp\": " + String(MAX_TEMP) + ","
+                             "\"min_temp\": " + String(MIN_TEMP) + ","
+                             "\"modes\": [\"off\", \"auto\", \"heat\", \"cool\"],"
+                             "\"mode_cmd_t\": \"pool/set_mode\","
+                             "\"temp_cmd_t\": \"pool/set_temp\","
+                             "\"mode_stat_t\": \"pool/mode\","
+                             "\"curr_temp_t\": \"pool/temp_in\","
+                             "\"avty_t\": \"pool/available\","
+                             "\"platform\": \"mqtt\","
+                             "\"state_topic\": \"pool/data\","
+                             "\"json_attr_t\": \"pool/data\""
+                             "}";
 
 #define DEBUG 1
 
@@ -57,8 +62,6 @@ ESP8266HTTPUpdateServer httpUpdater;
 #define HEAT B00001000
 #define AUTO B00000100
 
-#define MAX_TEMP 33
-#define MIN_TEMP 15
 
 
 
@@ -608,7 +611,7 @@ void loop()
     {
         client.publish("pool/debug", "DEBUG");
         client.loop();
-        client.publish("homeassistant/climate/PoolHeater/config", autodiscoverPayload);
+        client.publish("homeassistant/climate/PoolHeater/config", autodiscoverPayload.c_str());
         client.loop();
         lastPublishAutoDiscoverTime = millis();
         initialAutoDiscoverPublished = true;
