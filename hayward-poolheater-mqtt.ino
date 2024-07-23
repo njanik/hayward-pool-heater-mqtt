@@ -64,9 +64,6 @@ ESP8266HTTPUpdateServer httpUpdater;
 
 
 
-
-
-
 long rssi = 0;
 float cmdTemp;
 byte cmdMode;
@@ -582,10 +579,10 @@ void setup()
     delay(500);
 
     // OTA webserver
-    httpUpdater.setup(&server);
-    server.on("/", HTTP_GET, []()
-              { server.send(200, "text/plain", "Ok"); });
-    server.begin();
+    // httpUpdater.setup(&server);
+    // server.on("/", HTTP_GET, []()
+    //           { server.send(200, "text/plain", "Ok"); });
+    // server.begin();
 
     client.setServer(mqtt_server, 1883);
     client.setCallback(mqttMsgReceivedCallBack);
